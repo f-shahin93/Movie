@@ -2,11 +2,10 @@ import com.shahin.movieapp.Android
 import com.shahin.movieapp.Libs
 
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'kotlin-kapt'
-    id 'androidx.navigation.safeargs.kotlin'
 }
 
 android {
@@ -14,7 +13,6 @@ android {
     buildToolsVersion "29.0.3"
 
     defaultConfig {
-        applicationId Android.applicationId
         minSdkVersion Android.minSdkVersion
         targetSdkVersion Android.targetSdkVersion
         versionCode Android.versionCode
@@ -30,37 +28,24 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
     kotlinOptions {
-        jvmTarget = '11'
+        jvmTarget = '1.8'
     }
 }
 
 dependencies {
 
-    implementation project(':data')
-
-    implementation Libs.Jetpack.coreKtx
-    implementation Libs.Jetpack.appCompat
-    implementation Libs.Jetpack.material
-    implementation Libs.Jetpack.constraintLayout
-
     implementation Libs.Plugins.kotlin
-    implementation Libs.Jetpack.lifecycleExtensions
-    implementation Libs.Jetpack.viewModelKtx
-    implementation Libs.Jetpack.livedataKtx
     implementation Libs.Common.coroutines
     implementation Libs.Common.coroutinesAndroid
-    implementation Libs.Jetpack.annotationsJet
 
-    implementation Libs.Jetpack.navigationFragment
-    implementation Libs.Jetpack.navigationUiKtx
-
-    implementation Libs.Common.glide
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    kapt Libs.Common.glideCompiler
+    implementation Libs.Common.retrofit
+    implementation Libs.Common.retrofitGson
+    implementation Libs.Common.okHttpInterceptor
+    implementation Libs.Common.gson
 
     implementation Libs.Common.dagger
     kapt Libs.Common.daggerCompiler
@@ -68,8 +53,12 @@ dependencies {
     implementation Libs.Common.daggerAndroidSupport
     kapt Libs.Common.daggerAndroidProcessor
 
+    api Libs.Jetpack.room
+    api Libs.Jetpack.roomKtx
+    kapt Libs.Jetpack.roomCompiler
+
     testImplementation Libs.Testing.junit
     androidTestImplementation Libs.Testing.extJunit
     androidTestImplementation Libs.Testing.espresso
-    implementation Libs.Testing.legacySupport
+
 }
