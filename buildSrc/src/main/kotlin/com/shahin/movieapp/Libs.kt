@@ -25,6 +25,7 @@ object Libs {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
+        const val pagination = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
     }
 
     object Common {
