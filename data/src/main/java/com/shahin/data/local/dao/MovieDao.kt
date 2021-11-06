@@ -1,8 +1,44 @@
 package com.shahin.data.local.dao
 
-import androidx.room.Dao
+import androidx.room.*
+import com.shahin.data.local.model.*
 
 @Dao
-interface MovieDao {
+abstract class MovieDao {
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    abstract fun insertMovieItem(movieItemEntity: List<MovieItemEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insert(movieItemEntity: MovieItemEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insert(movieDetailEntity: MovieDetailEntity)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insertMovieDetail(movieDetailEntity: List<MovieDetailEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insertGenres(genresEntity: List<GenresEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insertProductionCountries(productionCountryEntity: List<ProductionCountryEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insertProductionCompanies(productionCompanyEntity: List<ProductionCompanyEntity>)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    protected abstract fun insertSpokenLanguages(spokenLanguageEntity: List<SpokenLanguageEntity>)
+
+    @Transaction
+    fun insertAll(movieWithDetails: List<MovieWithDetails>) {
+        insertMovieItem(movieItemEntity = movieWithDetails.map { it.movieItemEntity })
+        insertMovieDetail(movieDetailEntity = movieWithDetails.map { it.movieDetailEntity })
+        insertGenres(genresEntity = movieWithDetails.flatMap { it.genres })
+        insertProductionCountries(productionCountryEntity = movieWithDetails.flatMap { it.productionCountryEntity })
+        insertProductionCompanies(productionCompanyEntity = movieWithDetails.flatMap { it.productionCompanyEntity })
+        insertSpokenLanguages(spokenLanguageEntity = movieWithDetails.flatMap { it.spokenLanguageEntity })
+    }
+
 
 }

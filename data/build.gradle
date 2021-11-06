@@ -57,6 +57,8 @@ dependencies {
     api Libs.Jetpack.roomKtx
     kapt Libs.Jetpack.roomCompiler
 
+    api Libs.Jetpack.pagination
+
     testImplementation Libs.Testing.junit
     androidTestImplementation Libs.Testing.extJunit
     androidTestImplementation Libs.Testing.espresso
