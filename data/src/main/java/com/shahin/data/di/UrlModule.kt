@@ -8,12 +8,12 @@ import javax.inject.Named
 class UrlModule {
 
     companion object {
-        const val WEBSITE_ENDPOINT = ""
-        const val BASE_PATH_API_URL = ""
+        const val WEBSITE_ENDPOINT = "https://api.themoviedb.org"
+        const val BASE_PATH = "3/"
     }
 
     @Provides
     @Named("baseUrl")
-    fun provideBaseUrl(): String = WEBSITE_ENDPOINT + BASE_PATH_API_URL
+    fun provideBaseUrl(): String = WEBSITE_ENDPOINT + BASE_PATH
 
 }
