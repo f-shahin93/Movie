@@ -39,6 +39,7 @@ object Libs {
         const val gson = "com.google.code.gson:gson:${Versions.gson}"
         const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
         const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+        const val retrofitMoshi = "com.squareup.retrofit2:converter-moshi:${Versions.moshi}"
         const val okHttpInterceptor = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
         const val stetho = "com.facebook.stetho:stetho:${Versions.stetho}"
         const val stetho_OkHttp = "com.facebook.stetho:stetho-okhttp3:${Versions.stetho}"

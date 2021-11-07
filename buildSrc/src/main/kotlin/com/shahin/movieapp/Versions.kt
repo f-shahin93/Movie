@@ -21,6 +21,7 @@ object Versions {
     const val okHttp = "4.9.2"
     const val gson = "2.8.7"
     const val retrofit = "2.9.0"
+    const val moshi = "2.8.1"
     const val stetho = "1.6.0"
     const val glide = "4.12.0"
     const val lottie = "3.4.1"

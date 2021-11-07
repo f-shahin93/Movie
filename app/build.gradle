@@ -65,14 +65,10 @@ dependencies {
     implementation Libs.Jetpack.navigationUiKtx
 
     implementation Libs.Common.glide
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt Libs.Common.glideCompiler
 
     implementation Libs.Common.dagger
     kapt Libs.Common.daggerCompiler
-    implementation Libs.Common.daggerAndroid
-    implementation Libs.Common.daggerAndroidSupport
-    kapt Libs.Common.daggerAndroidProcessor
 
     testImplementation Libs.Testing.junit
     androidTestImplementation Libs.Testing.extJunit

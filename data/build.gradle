@@ -42,16 +42,14 @@ dependencies {
     implementation Libs.Common.coroutines
     implementation Libs.Common.coroutinesAndroid
 
-    implementation Libs.Common.retrofit
-    implementation Libs.Common.retrofitGson
+    api Libs.Common.retrofit
+    api Libs.Common.retrofitMoshi
+    api Libs.Common.retrofitGson
     implementation Libs.Common.okHttpInterceptor
-    implementation Libs.Common.gson
+    api Libs.Common.gson
 
     implementation Libs.Common.dagger
     kapt Libs.Common.daggerCompiler
-    implementation Libs.Common.daggerAndroid
-    implementation Libs.Common.daggerAndroidSupport
-    kapt Libs.Common.daggerAndroidProcessor
 
     api Libs.Jetpack.room
     api Libs.Jetpack.roomKtx
