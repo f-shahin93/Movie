@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
-@Module
+@Module(includes = [UrlModule::class])
 class NetworkModule {
 
     @Provides
@@ -20,7 +20,10 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofit(client: OkHttpClient, @Named("baseUrl") baseUrl: String): Retrofit =
+    fun provideRetrofit(
+        client: OkHttpClient,
+        @Named("baseUrl") baseUrl: String
+    ): Retrofit =
         Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(client)
