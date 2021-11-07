@@ -61,6 +61,22 @@ fun ProductionCountryDto.toEntity(id: Long): ProductionCountryEntity =
 fun SpokenLanguageDto.toEntity(id: Long): SpokenLanguageEntity =
     SpokenLanguageEntity(id, enName, iso, name)
 
+fun MovieItemEntity.toDomain(): MovieShort =
+    MovieShort(
+        id,
+        backdropPath,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        title,
+        video,
+        voteAverage,
+        voteCount
+    )
+
 fun MovieWithDetails.toDomain(): MovieShort =
     movieItemEntity.run {
         MovieShort(
@@ -96,7 +112,7 @@ fun MovieWithDetails.toFullDomain(): MovieDetail {
                 productionCompanies = productionCompanyEntity.map { it.toDomain() },
                 productionCountries = productionCountryEntity.map { it.toDomain() },
                 releaseDate = releaseDate,
-                runtime =runtime,
+                runtime = runtime,
                 spokenLanguages = spokenLanguageEntity.map { it.toDomain() },
                 status = status,
                 title = title,

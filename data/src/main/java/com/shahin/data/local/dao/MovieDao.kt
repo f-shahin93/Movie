@@ -2,6 +2,7 @@ package com.shahin.data.local.dao
 
 import androidx.room.*
 import com.shahin.data.local.model.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 abstract class MovieDao {
@@ -31,7 +32,7 @@ abstract class MovieDao {
     protected abstract fun insertSpokenLanguages(spokenLanguageEntity: List<SpokenLanguageEntity>)
 
     @Transaction
-    fun insertAll(movieWithDetails: List<MovieWithDetails>) {
+    open fun insertAll(movieWithDetails: List<MovieWithDetails>) {
         insertMovieItem(movieItemEntity = movieWithDetails.map { it.movieItemEntity })
         insertMovieDetail(movieDetailEntity = movieWithDetails.map { it.movieDetailEntity })
         insertGenres(genresEntity = movieWithDetails.flatMap { it.genres })
@@ -40,5 +41,10 @@ abstract class MovieDao {
         insertSpokenLanguages(spokenLanguageEntity = movieWithDetails.flatMap { it.spokenLanguageEntity })
     }
 
+    @Query("SELECT * FROM movie_item")
+    abstract fun getMovieList(): Flow<List<MovieItemEntity>>
+
+    @Query("SELECT * FROM movie_item WHERE id = :id")
+    abstract fun getMovieDetail(id:Long): MovieWithDetails
 
 }
