@@ -17,6 +17,8 @@ import javax.inject.Singleton
 )
 interface ApplicationGraph {
 
+    fun mainComponent(): MainActivitySubComponent.Factory
+
     @Component.Builder
     interface Builder {
         @BindsInstance
