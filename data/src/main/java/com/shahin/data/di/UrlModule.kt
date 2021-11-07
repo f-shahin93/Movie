@@ -8,7 +8,7 @@ import javax.inject.Named
 class UrlModule {
 
     companion object {
-        const val WEBSITE_ENDPOINT = "https://api.themoviedb.org"
+        const val WEBSITE_ENDPOINT = "https://api.themoviedb.org/"
         const val BASE_PATH = "3/"
     }
 
