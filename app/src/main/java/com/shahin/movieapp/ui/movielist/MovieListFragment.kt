@@ -12,6 +12,7 @@ import com.shahin.movieapp.R
 import com.shahin.movieapp.databinding.FragmentMovieListBinding
 import com.shahin.movieapp.di.ViewModelFactory
 import com.shahin.movieapp.intent.MainViewIntent
+import com.shahin.movieapp.model.SingleEventObserver
 import com.shahin.movieapp.ui.MainActivity
 import com.shahin.movieapp.ui.base.BaseFragment
 import com.shahin.movieapp.ui.utils.marginItemDecoration
@@ -75,8 +76,8 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     }
 
     private fun render() {
-        viewModel.state.observe(viewLifecycleOwner) {
-            when (it) {
+        viewModel.singleState.observe(viewLifecycleOwner,SingleEventObserver{
+            when(it){
                 is MainViewState.NavigateToDetail -> {
                     findNavController().navigate(
                         MovieListFragmentDirections.movieListToMovieDetail(
@@ -84,6 +85,11 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
                         )
                     )
                 }
+            }
+        })
+
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
                 is MainViewState.Success -> {
                     adapter.submitList(it.data)
                     if (it.data.size > 5) {

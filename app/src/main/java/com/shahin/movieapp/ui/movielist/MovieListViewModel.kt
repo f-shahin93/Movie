@@ -5,6 +5,7 @@ import com.shahin.data.model.Result
 import com.shahin.data.repository.MovieRepository
 import com.shahin.movieapp.model.MainViewState
 import com.shahin.movieapp.intent.MainViewIntent
+import com.shahin.movieapp.model.SingleEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.consumeAsFlow
@@ -19,6 +20,9 @@ class MovieListViewModel @Inject constructor(
 
     private val _state = MutableLiveData<MainViewState>()
     val state: LiveData<MainViewState> = _state
+
+    private val _singleState = MutableLiveData<SingleEvent<MainViewState>>()
+    val singleState: LiveData<SingleEvent<MainViewState>> = _singleState
 
     init {
         handleIntent()
@@ -56,7 +60,7 @@ class MovieListViewModel @Inject constructor(
     }
 
     private fun navigate(movieId: Long) {
-        _state.value = MainViewState.NavigateToDetail(movieId)
+        _singleState.value = SingleEvent(MainViewState.NavigateToDetail(movieId))
     }
 
 }
