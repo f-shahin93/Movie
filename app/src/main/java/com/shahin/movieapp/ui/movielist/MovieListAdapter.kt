@@ -39,8 +39,10 @@ class MovieListAdapter(val lifecycleOwner: LifecycleOwner, val listener: MovieIt
         fun bind(item: MovieShort) {
             itemVH = item
             binding.run {
-                name = item.title
+                title = item.title
                 icPath = item.backdropPath
+                overview = item.overview
+                rate = item.voteAverage.toString()
             }
         }
     }

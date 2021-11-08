@@ -4,40 +4,93 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
-            name="name"
+            name="title"
             type="String" />
+
         <variable
             name="icPath"
             type="String" />
+
+        <variable
+            name="overview"
+            type="String" />
+
+        <variable
+            name="rate"
+            type="String" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_root"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_xsmall"
+        app:cardCornerRadius="@dimen/corner_radius_small">
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/iv_avatar"
-            android:layout_width="wrap_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/item_root"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:imageUrl="@{icPath}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:background="@tools:sample/avatars" />
+            android:layout_margin="@dimen/margin_xsmall">
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?textAppearanceListItem"
-            android:text="@{name}"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/iv_avatar"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="Friends"/>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/iv_avatar"
+                android:layout_width="@dimen/avatar_big_size"
+                android:layout_height="@dimen/avatar_big_size"
+                app:cardCornerRadius="@dimen/corner_radius_small"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:imageUrl="@{icPath}"
+                    tools:background="@tools:sample/avatars" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_tiny"
+                android:ellipsize="start"
+                android:text="@{title}"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toTopOf="@id/tv_rate"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_avatar"
+                tools:text="Friends" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginTop="@dimen/margin_tiny"
+                android:text="@{rate}"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintBottom_toBottomOf="@id/iv_avatar"
+                app:layout_constraintStart_toEndOf="@id/iv_avatar"
+                tools:text="9.8" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="@{overview}"
+                android:textAppearance="?textAppearanceListItem"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/iv_avatar"
+                app:layout_constraintTop_toBottomOf="@id/iv_avatar"
+                tools:text="Friends" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

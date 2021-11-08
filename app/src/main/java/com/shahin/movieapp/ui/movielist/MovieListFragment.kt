@@ -1,13 +1,12 @@
 package com.shahin.movieapp.ui.movielist
 
 import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.ViewPager2
 import com.shahin.movieapp.model.MainViewState
 import com.shahin.movieapp.R
 import com.shahin.movieapp.databinding.FragmentMovieListBinding
@@ -26,6 +25,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     private val viewModel by viewModels<MovieListViewModel> { viewModelFactory }
 
     lateinit var adapter: MovieListAdapter
+    lateinit var sliderAdapter: SliderAdapter
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,6 +38,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
         sendIntent()
         setupAdapter()
         setupRecycler()
+        setupSlider()
         render()
 
     }
@@ -59,6 +60,20 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
         }
     }
 
+    private fun setupSlider() {
+        sliderAdapter = SliderAdapter(viewLifecycleOwner)
+        binding.apply {
+            vpSlider.adapter = sliderAdapter
+            indicatorSlider.setViewPager2(vpSlider)
+            vpSlider.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+                override fun onPageSelected(position: Int) {
+                    vpSlider.currentItem = position
+                }
+            })
+        }
+
+    }
+
     private fun render() {
         viewModel.state.observe(viewLifecycleOwner) {
             when (it) {
@@ -71,6 +86,11 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
                 }
                 is MainViewState.Success -> {
                     adapter.submitList(it.data)
+                    if (it.data.size > 5) {
+                        sliderAdapter.submitList(it.data.subList(0, 5))
+                        binding.indicatorSlider.setViewPager2(binding.vpSlider)
+                        binding.indicatorSlider.refreshDots()
+                    }
                 }
             }
         }
