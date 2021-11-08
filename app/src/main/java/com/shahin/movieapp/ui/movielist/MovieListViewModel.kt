@@ -30,7 +30,7 @@ class MovieListViewModel @Inject constructor(
                 when (it) {
                     is MainViewIntent.GetList -> { getMovieList() }
                     is MainViewIntent.IsNavigateToDetail -> {
-                        navigate(0)
+                        navigate(it.movieId)
                     }
                 }
             }

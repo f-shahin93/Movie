@@ -1,15 +1,134 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <data>
+        <variable
+            name="movie"
+            type="com.shahin.data.model.MovieDetail" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nsvMovieDetailParent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         tools:context=".ui.detail.MovieDetailFragment">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/margin_medium">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_movie_cover"
+                android:layout_width="0dp"
+                android:layout_height="200dp"
+                app:imageUrl="@{movie.backdropPath}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:background="@android:color/darker_gray" />
 
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:id="@+id/cv_poster"
+                android:layout_marginStart="@dimen/margin_medium"
+                app:cardCornerRadius="@dimen/corner_radius_small"
+                app:layout_constraintBottom_toBottomOf="@+id/iv_movie_cover"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_movie_cover">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="100dp"
+                    android:layout_height="150dp"
+                    app:imageUrl="@{movie.posterPath}"
+                    tools:background="@android:color/holo_blue_light" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{movie.title}"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:textStyle="bold"
+                android:textColor="@android:color/black"
+                android:textAppearance="?textAppearanceBody1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cv_poster"
+                app:layout_constraintTop_toBottomOf="@+id/iv_movie_cover"
+                tools:ignore="SpUsage"
+                tools:text="Doom patrol" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{movie.runtime.toString()}"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_small"
+                android:textAppearance="?textAppearanceBody2"
+                android:textColor="@android:color/black"
+                app:layout_constraintStart_toEndOf="@+id/cv_poster"
+                app:layout_constraintTop_toBottomOf="@+id/tv_title"
+                tools:ignore="SpUsage"
+                tools:text="2:09" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{movie.releaseDate}"
+                android:layout_marginStart="@dimen/margin_small"
+                android:textColor="@android:color/black"
+                android:textAppearance="?textAppearanceBody2"
+                app:layout_constraintStart_toEndOf="@+id/tv_duration"
+                app:layout_constraintTop_toTopOf="@+id/tv_duration"
+                app:layout_constraintBottom_toBottomOf="@id/tv_duration"
+                tools:ignore="SpUsage"
+                tools:text="1999-05-03" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_overview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:textStyle="bold"
+                android:switchTextAppearance="?textAppearanceBody1"
+                android:text="@string/title_description"
+                android:textColor="@android:color/black"
+                android:textAppearance="?textAppearanceBody2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cv_poster"
+                tools:ignore="SpUsage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:lineSpacingExtra="4dp"
+                android:text="@{movie.overview}"
+                android:textAppearance="?textAppearanceBody2"
+                android:textColor="@android:color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_overview"
+                tools:ignore="SpUsage"
+                tools:text="tetgj ghjhjasd kjksj dljljjlajdsljladla\n skjdkjkdkaskdaksdkjaksdkajdka\n khdjakhsdkajkdhajkhdkja" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>
