@@ -16,11 +16,11 @@ interface MovieService {
     ): Response<RemoteResultsModel<MovieDto>>
 
 
-    /*@GET("movie/{id}")
-    suspend fun getTrendingMovie(
+    @GET("movie/{id}")
+    suspend fun getMovie(
         @Path("id") movieId: Long,
         @Query("api_key") apiKey: String,
         @Query("language") language: String = "en-US",
-    ): Response<MovieDto>*/
+    ): Response<MovieDto>
 
 }

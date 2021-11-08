@@ -41,10 +41,20 @@ abstract class MovieDao {
         insertSpokenLanguages(spokenLanguageEntity = movieWithDetails.flatMap { it.spokenLanguageEntity })
     }
 
+    @Transaction
+    open fun insertAll(movieWithDetail :MovieWithDetails){
+        insert(movieWithDetail.movieItemEntity)
+        insert(movieWithDetail.movieDetailEntity)
+        insertGenres(movieWithDetail.genres)
+        insertProductionCountries(movieWithDetail.productionCountryEntity)
+        insertProductionCompanies(movieWithDetail.productionCompanyEntity)
+        insertSpokenLanguages(movieWithDetail.spokenLanguageEntity)
+    }
+
     @Query("SELECT * FROM movie_item")
     abstract fun getMovieList(): Flow<List<MovieItemEntity>>
 
     @Query("SELECT * FROM movie_item WHERE id = :id")
-    abstract fun getMovieDetail(id:Long): MovieWithDetails
+    abstract fun getMovieDetail(id:Long): Flow<MovieWithDetails>
 
 }

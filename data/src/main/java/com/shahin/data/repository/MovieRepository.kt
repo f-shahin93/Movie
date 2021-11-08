@@ -1,6 +1,7 @@
 package com.shahin.data.repository
 
 import com.shahin.data.local.dao.MovieDao
+import com.shahin.data.model.MovieDetail
 import com.shahin.data.model.MovieShort
 import com.shahin.data.model.Result
 import com.shahin.data.network.services.MovieService
@@ -11,6 +12,7 @@ import javax.inject.Inject
 
 interface MovieRepository {
     fun getTrendingMovieList(): Flow<Result<List<MovieShort>>>
+    fun getMovie(id:Long): Flow<Result<MovieDetail>>
 }
 
 class DefaultMovieRepository @Inject constructor(
@@ -31,6 +33,23 @@ class DefaultMovieRepository @Inject constructor(
 
         movieDao.getMovieList().collect {
             emit(Result.Success(it.map { item -> item.toDomain() }))
+        }
+
+    }.catch { ex -> emit(Result.Error(ex)) }
+        .flowOn(Dispatchers.IO)
+
+    override fun getMovie(id: Long): Flow<Result<MovieDetail>> = flow {
+        emit(Result.Loading())
+        movieDao.getMovieDetail(id).collect {
+            emit(Result.Loading(it.toFullDomain()))
+            emit(Result.Success(it.toFullDomain()))
+        }
+
+        val remoteResult = movieService.getMovie(id,Constant.api_key).body()
+        remoteResult?.let { movieDao.insertAll(remoteResult.toDetailEntity()) }
+
+        movieDao.getMovieDetail(id).collect {
+            emit(Result.Success(it.toFullDomain()))
         }
 
     }.catch { ex -> emit(Result.Error(ex)) }
