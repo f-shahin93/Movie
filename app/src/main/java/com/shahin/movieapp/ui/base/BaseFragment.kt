@@ -13,7 +13,7 @@ abstract class BaseFragment<B : ViewDataBinding>(@LayoutRes layoutId: Int) : Fra
 
     private var _binding: B? = null
     protected val binding
-        get() = _binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
