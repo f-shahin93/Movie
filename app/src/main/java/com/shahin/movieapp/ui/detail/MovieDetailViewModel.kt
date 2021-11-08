@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.shahin.data.model.Result
+import com.shahin.data.model.DataResult
 import com.shahin.data.repository.MovieRepository
 import com.shahin.movieapp.ui.detail.intent.MovieDetailViewIntent
 import kotlinx.coroutines.channels.Channel
@@ -42,13 +42,13 @@ class MovieDetailViewModel @Inject constructor(
         viewModelScope.launch {
             movieRepository.getMovie(id).collect { result ->
                 when (result) {
-                    is Result.Success -> {
+                    is DataResult.Success -> {
                         result.data?.let { data -> _state.postValue(MovieDetailViewState.Success(data)) }
                     }
-                    is Result.Loading -> {
+                    is DataResult.Loading -> {
                         _state.postValue(MovieDetailViewState.IsLoading(result.data == null))
                     }
-                    is Result.Error -> {
+                    is DataResult.Error -> {
                         _state.postValue(MovieDetailViewState.Error(result.message ?: Throwable()))
                     }
                 }

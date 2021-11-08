@@ -2,6 +2,7 @@ package com.shahin.movieapp.di
 
 import android.app.Application
 import com.shahin.data.di.DataModule
+import com.shahin.movieapp.ui.DataUpdateWorker
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton
@@ -18,6 +19,8 @@ import javax.inject.Singleton
 interface ApplicationGraph {
 
     fun mainComponent(): MainActivitySubComponent.Factory
+
+    fun inject(worker: DataUpdateWorker)
 
     @Component.Builder
     interface Builder {

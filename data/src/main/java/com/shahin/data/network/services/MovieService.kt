@@ -2,6 +2,7 @@ package com.shahin.data.network.services
 
 import com.shahin.data.network.model.MovieDto
 import com.shahin.data.network.model.RemoteResultsModel
+import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -14,6 +15,11 @@ interface MovieService {
     suspend fun getTrendingMovieList(
         @Query("api_key") apiKey: String
     ): Response<RemoteResultsModel<MovieDto>>
+
+    @GET("trending/movie/day")
+    fun getTrendingMovies(
+        @Query("api_key") apiKey: String
+    ): Call<RemoteResultsModel<MovieDto>>
 
 
     @GET("movie/{id}")

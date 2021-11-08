@@ -47,6 +47,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     private fun sendIntent() {
         lifecycleScope.launchWhenResumed {
             viewModel.mainIntent.send(MainViewIntent.GetList)
+            viewModel.mainIntent.send(MainViewIntent.SetupWorkManager(requireContext().applicationContext))
         }
     }
 
