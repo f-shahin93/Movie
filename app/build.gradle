@@ -67,6 +67,8 @@ dependencies {
     implementation Libs.Common.glide
     kapt Libs.Common.glideCompiler
 
+    implementation Libs.Common.indicator
+
     implementation Libs.Common.dagger
     kapt Libs.Common.daggerCompiler
 

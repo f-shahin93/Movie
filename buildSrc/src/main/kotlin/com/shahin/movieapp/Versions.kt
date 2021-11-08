@@ -25,6 +25,7 @@ object Versions {
     const val stetho = "1.6.0"
     const val glide = "4.12.0"
     const val lottie = "3.4.1"
+    const val indicator = "4.2"
     const val junit = "4.13.2"
     const val extJunit = "1.1.3"
     const val espresso = "3.4.0"

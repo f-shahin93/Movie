@@ -46,6 +46,7 @@ object Libs {
         const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         const val lottie = "com.airbnb.android:lottie:${Versions.lottie}"
+        const val indicator = "com.tbuonomo:dotsindicator:${Versions.indicator}"
     }
 
     object Testing {
