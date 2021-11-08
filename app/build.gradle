@@ -72,6 +72,8 @@ dependencies {
     implementation Libs.Common.dagger
     kapt Libs.Common.daggerCompiler
 
+    implementation Libs.Jetpack.workManager
+
     testImplementation Libs.Testing.junit
     androidTestImplementation Libs.Testing.extJunit
     androidTestImplementation Libs.Testing.espresso

@@ -26,6 +26,7 @@ object Libs {
         const val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
         const val pagination = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
+        const val workManager = "androidx.work:work-runtime-ktx:${Versions.workManager}"
     }
 
     object Common {

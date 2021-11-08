@@ -17,6 +17,7 @@ object Versions {
     const val constraintLayout = "2.1.1"
     const val room = "2.3.0"
     const val paging = "3.0.1"
+    const val workManager = "2.5.0"
     const val dagger = "2.40"
     const val okHttp = "4.9.2"
     const val gson = "2.8.7"
