@@ -16,6 +16,7 @@ import com.shahin.movieapp.model.SingleEventObserver
 import com.shahin.movieapp.ui.MainActivity
 import com.shahin.movieapp.ui.base.BaseFragment
 import com.shahin.movieapp.ui.utils.marginItemDecoration
+import kotlinx.android.synthetic.main.fragment_movie_list.*
 import javax.inject.Inject
 
 class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragment_movie_list),
@@ -77,8 +78,8 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     }
 
     private fun render() {
-        viewModel.singleState.observe(viewLifecycleOwner,SingleEventObserver{
-            when(it){
+        viewModel.singleState.observe(viewLifecycleOwner, SingleEventObserver {
+            when (it) {
                 is MainViewState.NavigateToDetail -> {
                     findNavController().navigate(
                         MovieListFragmentDirections.movieListToMovieDetail(
@@ -90,6 +91,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
         })
 
         viewModel.state.observe(viewLifecycleOwner) {
+            setupProgressBar()
             when (it) {
                 is MainViewState.Success -> {
                     adapter.submitList(it.data)
@@ -99,7 +101,21 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
                         binding.indicatorSlider.refreshDots()
                     }
                 }
+                is MainViewState.Error -> {
+                    // can retry req
+                }
+                is MainViewState.IsLoading -> {
+
+                }
             }
+        }
+    }
+
+    private fun setupProgressBar() {
+        binding.progressBar.visibility = if (adapter.currentList.isNullOrEmpty()) {
+            View.VISIBLE
+        } else {
+            View.INVISIBLE
         }
     }
 
