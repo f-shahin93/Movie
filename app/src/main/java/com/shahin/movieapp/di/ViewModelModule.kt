@@ -16,10 +16,10 @@ abstract class ViewModelModule {
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory): ViewModelProvider.Factory
 
-    @Binds
+    /*@Binds
     @IntoMap
     @ViewModelKey(MovieListViewModel::class)
-    abstract fun bindMovieListViewModel(movieListViewModel: MovieListViewModel): ViewModel
+    abstract fun bindMovieListViewModel(movieListViewModel: MovieListViewModel): ViewModel*/
 
     @Binds
     @IntoMap

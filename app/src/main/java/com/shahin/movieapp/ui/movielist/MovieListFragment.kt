@@ -1,19 +1,17 @@
 package com.shahin.movieapp.ui.movielist
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.shahin.movieapp.model.MainViewState
 import com.shahin.movieapp.R
 import com.shahin.movieapp.databinding.FragmentMovieListBinding
-import com.shahin.movieapp.di.ViewModelFactory
+import com.shahin.movieapp.di.movielist.MovieListComponent
+import com.shahin.movieapp.di.movielist.inject
 import com.shahin.movieapp.intent.MainViewIntent
 import com.shahin.movieapp.model.SingleEventObserver
-import com.shahin.movieapp.ui.MainActivity
 import com.shahin.movieapp.ui.base.BaseFragment
 import com.shahin.movieapp.ui.utils.marginItemDecoration
 import javax.inject.Inject
@@ -22,15 +20,17 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     MovieListAdapter.MovieItemClickListener {
 
     @Inject
-    lateinit var viewModelFactory: ViewModelFactory
-    private val viewModel by viewModels<MovieListViewModel> { viewModelFactory }
+    lateinit var viewModel : MovieListViewModel
 
     lateinit var adapter: MovieListAdapter
     lateinit var sliderAdapter: SliderAdapter
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        (requireActivity() as MainActivity).mainActivitySubComponent.inject(this)
+    private lateinit var movieListComponent: MovieListComponent
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        movieListComponent = inject()
+        movieListComponent.inject(this)
+        super.onCreate(savedInstanceState)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,7 +56,7 @@ class MovieListFragment : BaseFragment<FragmentMovieListBinding>(R.layout.fragme
     }
 
     private fun setupRecycler() {
-        binding.list.run {
+        binding.recyclerList.run {
             adapter = this@MovieListFragment.adapter
             addItemDecoration(marginItemDecoration(marginBottom = 4))
         }

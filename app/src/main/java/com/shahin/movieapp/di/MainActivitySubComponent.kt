@@ -7,7 +7,7 @@ import dagger.Subcomponent
 @Subcomponent
 interface MainActivitySubComponent {
 
-    fun inject(movieListFragment: MovieListFragment)
+    //fun inject(movieListFragment: MovieListFragment)
     fun inject(movieDetailFragment: MovieDetailFragment)
 
     @Subcomponent.Factory

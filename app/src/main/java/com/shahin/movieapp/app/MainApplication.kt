@@ -13,6 +13,9 @@ class MainApplication : Application() {
         applicationGraph = DaggerApplicationGraph.builder()
             .application(this)
             .build()
+
+        applicationGraph.inject(this)
+
     }
 
 }
