@@ -57,8 +57,4 @@ dependencies {
 
     api Libs.Jetpack.pagination
 
-    testImplementation Libs.Testing.junit
-    androidTestImplementation Libs.Testing.extJunit
-    androidTestImplementation Libs.Testing.espresso
-
 }
