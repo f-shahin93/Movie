@@ -7,7 +7,9 @@ import com.shahin.data.model.DataResult
 import com.shahin.data.network.services.MovieService
 import com.shahin.data.utils.Constant
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.withTimeout
 import javax.inject.Inject
 
 interface MovieRepository {
@@ -23,9 +25,15 @@ class DefaultMovieRepository @Inject constructor(
 
     override fun getTrendingMovieList() = flow {
         emit(DataResult.Loading())
-        movieDao.getMovieList().collect {
-            emit(DataResult.Loading(it.map { item -> item.toDomain() }))
-            emit(DataResult.Success(it.map { item -> item.toDomain() }))
+        try {
+            withTimeout(3000){
+                movieDao.getMovieList().collect {
+                    emit(DataResult.Loading(it.map { item -> item.toDomain() }))
+                    emit(DataResult.Success(it.map { item -> item.toDomain() }))
+                }
+            }
+        }catch (ex:Exception){
+            emit(DataResult.Error(ex))
         }
 
         val remoteResult = movieService.getTrendingMovieList(Constant.api_key).body()?.list
@@ -59,7 +67,8 @@ class DefaultMovieRepository @Inject constructor(
 
     override fun updateData(): Boolean =
         try {
-            val remoteResult = movieService.getTrendingMovies(Constant.api_key).execute().body()?.list
+            val remoteResult =
+                movieService.getTrendingMovies(Constant.api_key).execute().body()?.list
             val movieWithDetails = remoteResult?.map { it.toDetailEntity() }
             movieWithDetails?.let { movieDao.insertAll(movieWithDetails) }
             remoteResult.isNullOrEmpty().not()
