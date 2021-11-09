@@ -75,7 +75,15 @@ dependencies {
     implementation Libs.Jetpack.workManager
 
     testImplementation Libs.Testing.junit
-    androidTestImplementation Libs.Testing.extJunit
+    androidTestImplementation Libs.Testing.extJunitKtx
+    androidTestImplementation Libs.Testing.testCoreKtx
     androidTestImplementation Libs.Testing.espresso
+    androidTestImplementation Libs.Testing.espressoContrib
+    androidTestImplementation Libs.Testing.testTruth
+    androidTestImplementation Libs.Testing.testRunner
+    androidTestImplementation Libs.Testing.testRules
+
     implementation Libs.Testing.legacySupport
+    androidTestImplementation Libs.Testing.navigation
+    debugImplementation Libs.Testing.fragmentScenario
 }

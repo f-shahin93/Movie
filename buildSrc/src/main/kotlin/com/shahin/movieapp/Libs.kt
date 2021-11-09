@@ -53,15 +53,23 @@ object Libs {
     object Testing {
         const val junit = "junit:junit:${Versions.junit}"
         const val extJunit = "androidx.test.ext:junit:${Versions.extJunit}"
+        const val extJunitKtx = "androidx.test.ext:junit-ktx:${Versions.extJunit}"
         const val espresso = "androidx.test.espresso:espresso-core:${Versions.espresso}"
+        const val espressoContrib = "androidx.test.espresso:espresso-contrib:${Versions.espressoContrib}"
+        const val testTruth = "androidx.test.ext:truth:${Versions.truth}"
+        const val testRules = "androidx.test:rules:${Versions.testRules}"
         const val testRunner = "androidx.test:runner:${Versions.testRunner}"
         const val mockitoKotlin = "com.nhaarman:mockito-kotlin-kt1.1:${Versions.mockitoKotlin}"
         const val mockitoCore = "org.mockito:mockito-core:${Versions.mockitoCore}"
         const val archTesting = "androidx.arch.core:core-testing:${Versions.archTest}"
         const val testCore = "androidx.test:core:${Versions.testCore}"
+        const val testCoreKtx = "androidx.test:core-ktx:${Versions.testCoreKtx}"
         const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
         const val hamcrest = "org.hamcrest:hamcrest:${Versions.hamcrest}"
         const val legacySupport = "androidx.legacy:legacy-support-v4:${Versions.legacySupport}"
+        const val navigation = "androidx.navigation:navigation-testing:${Versions.navigation}"
+        const val fragmentScenario = "androidx.fragment:fragment-testing:${Versions.fragmentScenario}"
+
     }
 
 }
