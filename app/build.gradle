@@ -25,10 +25,26 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro', 'retrofit2.pro', 'gson.pro'
         }
     }
+
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def STORE_FILE = properties.getProperty("STORE_FILE")
+    def KEY_PASSWORD = properties.getProperty("KEY_PASSWORD")
+    def KEY_ALIAS = properties.getProperty("KEY_ALIAS")
+
+    signingConfigs {
+        release {
+            storeFile file(STORE_FILE)
+            storePassword KEY_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
+        }
+    }
+
 
     buildFeatures {
         dataBinding true
